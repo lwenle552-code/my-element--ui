@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev":"pnpm -C play dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.0",
+  "workspaces": [
+    "packages/components",
+    "packages/theme-chalk",
+    "packages/utils"
+  ],
+  "dependencies": {
+    "@zi-shui/components": "workspace:*" ,
+     "@zi-shui/utils": "workspace:*",
+    "@zi-shui/theme-chalk": "workspace:*"
+  }
+}
