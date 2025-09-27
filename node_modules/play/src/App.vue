@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  测试
+  <z-icon></z-icon>
 </template>
 
 <style scoped></style>

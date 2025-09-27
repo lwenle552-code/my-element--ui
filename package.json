@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"pnpm -C play dev"
+    "dev": "pnpm -C play dev"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +16,11 @@
     "packages/utils"
   ],
   "dependencies": {
-    "@zi-shui/components": "workspace:*" ,
-     "@zi-shui/utils": "workspace:*",
-    "@zi-shui/theme-chalk": "workspace:*"
+    "@zi-shui/components": "workspace:*",
+    "@zi-shui/theme-chalk": "workspace:*",
+    "@zi-shui/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "unplugin-vue-define-options": "^3.1.1"
   }
 }
