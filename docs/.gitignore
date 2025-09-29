@@ -1,0 +1,9 @@
+# 忽略 Node.js 依赖
+node_modules/
+
+# 忽略 VitePress 缓存和构建产物
+.vitepress/cache/
+.vitepress/dist/
+
+# 忽略本地构建产物
+dist/
