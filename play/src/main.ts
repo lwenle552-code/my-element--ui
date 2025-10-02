@@ -2,9 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import Icon from '@zi-shui/components/icon'
 import '@zi-shui/theme-chalk/src/index.scss'
-const plugins = [
-  Icon
-]
+import Button from '@zi-shui/components/button'
+const plugins = [Icon, Button]
 
 const app = createApp(App)
 plugins.forEach(plugin => {

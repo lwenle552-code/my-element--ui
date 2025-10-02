@@ -3,7 +3,7 @@
 
 //.z-button
 @mixin b($block) {
-  $B :$namespace+'-'+$block;
+  $B: $namespace + '-' + $block;
   .#{$B} {
     @content;
   }
@@ -18,20 +18,39 @@
   }
 }
 
-//&--primary => .z-button--primary
-@mixin m($modifier) {
+// ------------------------------------
+// 【新增】修复 'Undefined mixin' 错误
+// @include is(loading) 现在可以正确工作
+// ------------------------------------
+//.z-button.is-xxx
+@mixin is($state) {
   @at-root {
-    #{&+$modifier-separator + $modifier} {
+    &.#{$state-prefix + $state} {
       @content;
     }
   }
 }
 
-//$__header => .z-button__header 
-@mixin e($element) {
+//&--primary => .z-button--primary
+@mixin m($modifier) {
   @at-root {
-    #{&+$element-separator + $element} {
+    #{& + $modifier-separator + $modifier} {
       @content;
     }
   }
+}
+
+//$__header => .z-button__header
+@mixin e($element) {
+  @at-root {
+    #{& + $element-separator + $element} {
+      @content;
+    }
+  }
+}
+
+@mixin button-variant($color, $background-color, $border-color) {
+  color: $color;
+  background: $background-color;
+  border-color: $border-color;
 }

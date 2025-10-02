@@ -1,0 +1,122 @@
+@use 'mixins/mixins' as *;
+@use 'common/var' as *;
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// 【新增】点点点动画定义
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@include b(button) {
+  // BEM规范
+  align-items: center;
+  display: inline-flex;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #fafafa;
+  border-radius: 5px;
+  user-select: none;
+  min-height: 40px;
+  line-height: 1;
+  vertical-align: middle;
+  padding: 0 20px;
+
+  // --- 新增 loading 状态下的样式 ---
+  // 处理 loading 状态本身
+  @include is(loading) {
+    // 禁用指针事件
+    pointer-events: none;
+    // 改变光标
+    cursor: default;
+    // 样式弱化（可选）
+    opacity: 0.8;
+  }
+
+  @include e(loading-dots) {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 5px; // 确保和后面的文字有间距
+
+    // 动画点点样式
+    .dot {
+      // 对应 button.vue 中的 class="dot"
+      width: 6px;
+      height: 6px;
+      margin: 0 2px;
+      background-color: currentColor; // 使用按钮文字颜色
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0;
+      animation: dot-pulse 1s infinite ease-in-out;
+
+      &:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+      &:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0s;
+      }
+    }
+  }
+  // --- loading 状态样式新增结束 ---
+
+  @include m(medium) {
+    padding: 0 20px;
+  }
+
+  @include m(small) {
+    padding: 0 18px;
+  }
+
+  @include m(large) {
+    padding: 0 25px;
+  }
+
+  @include when(disabled) {
+    // 针对不同类型处理
+    &,
+    &:hover,
+    &:focus {
+      cursor: not-allowed;
+    }
+  }
+
+  @include when(round) {
+    border-radius: 20px;
+  }
+
+  @include m(primary) {
+    // 渲染不同类型的button
+    @include button-variant($color-white, $color-primary, $color-primary);
+  }
+
+  @include m(success) {
+    @include button-variant($color-white, $color-success, $color-success);
+  }
+
+  @include m(warning) {
+    @include button-variant($color-white, $color-warning, $color-warning);
+  }
+
+  @include m(danger) {
+    @include button-variant($color-white, $color-danger, $color-danger);
+  }
+}
