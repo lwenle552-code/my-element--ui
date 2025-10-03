@@ -16,6 +16,15 @@ const handleButtonClick = () => {
     isLoading.value = false
   }, 2000)
 }
+
+const username = ref('hello')
+const handleFocus = (e: FocusEvent) => {
+  console.log((e.target as HTMLInputElement).value, 'focus')
+}
+
+const handleBlur = (e: FocusEvent) => {
+  console.log((e.target as HTMLInputElement).value, 'blur')
+}
 </script>
 
 <template>
@@ -35,6 +44,22 @@ const handleButtonClick = () => {
       </z-icon>
     </template>
   </z-button>
+
+  <z-input v-model="username" @blur="handleBlur" @focus="handleFocus" placeholder="请输入密码" :show-password="true"
+    :clearable="true">
+    <template #prepend>前端</template>
+    <template #prefixIcon>
+      <z-icon>
+        <AddCircle></AddCircle>
+      </z-icon>
+    </template>
+    <template #sufixIcon>
+      <!-- <z-icon>
+        <AddCircle></AddCircle>
+      </z-icon> -->
+    </template>
+    <template #append>后端</template>
+  </z-input>
 </template>
 
 <style scoped></style>
