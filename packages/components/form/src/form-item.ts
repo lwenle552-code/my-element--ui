@@ -38,7 +38,7 @@ export interface FormItemContext extends FormItemProps {
   validate: (
     trigger: string,
     callback?: (isValid: boolean) => void
-  ) => Promise<void>
+  ) => Promise<any>
 }
 
 export const formItemContextKey: InjectionKey<FormItemContext> =

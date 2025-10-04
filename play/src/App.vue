@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue' // <-- 1. 引入 ref
 import { AddCircle } from '@vicons/ionicons5'
 
+import type { FormInstance } from '@zi-shui/components/form'
 // 2. 新增 loading 状态
 const isLoading = ref(false)
 
@@ -30,6 +31,13 @@ const state = reactive({
   username: '',
   password: '',
 })
+const formRef = ref<FormInstance>()
+const validateForm = () => {
+  const form = formRef.value
+  form?.validate((valid, errors) => {
+    console.log(valid, errors)
+  })
+}
 </script>
 
 <template>
@@ -66,17 +74,26 @@ const state = reactive({
     <template #append>后端</template>
   </z-input>
 
-  <z-form :model="state" :rules="[
-    {
-      username: { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: ['blur', 'change'] }
-    }
-  ]">
+  <z-form ref="formRef" :model="state" :rules="{
+    username: { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: ['blur', 'change'] }
+  }
+    ">
     <z-form-item prop="username" label="用户名" :rules="[{ required: true, message: '请输入用户名', trigger: 'blur' },
 
     ]">
       <z-input placeholder="请输入用户名" :clearable="true" v-model="state.username">
       </z-input>
     </z-form-item>
+
+    <z-form-item prop="password" label="密码" :rules="[{ required: true, message: '请输入密码', trigger: 'blur' },
+
+    ]">
+      <z-input placeholder="请输入密码" :clearable="true" v-model="state.password" :show-password="true">
+      </z-input>
+    </z-form-item>
+    <z-button a="1" b="2" size="medium" type="primary" :round="true" @click="validateForm">
+      提交
+    </z-button>
   </z-form>
 </template>
 

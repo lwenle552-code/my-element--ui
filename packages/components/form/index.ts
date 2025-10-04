@@ -1,16 +1,19 @@
-// 整合表单组件，表单组件的入口
 import { withInstall } from '@zi-shui/utils/with-install'
 import _FormItem from './src/form-item.vue'
+import _Form from './src/form.vue'
 
 const FormItem = withInstall(_FormItem)
+const Form = withInstall(_Form)
 
-export default FormItem
+export { FormItem, Form }
+export default Form
 
-export type { FormItem } from './src/form-item'
+export type { FormItemProps } from './src/form-item'
+export type { FormProps, FormInstance } from './src/form'
 
 declare module 'vue' {
   export interface GlobalComponents {
     ZFormItem: typeof FormItem
-    'z-form-item': typeof FormItem
+    ZForm: typeof Form
   }
 }
