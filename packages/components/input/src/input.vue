@@ -36,8 +36,12 @@
 
 <script setup lang="ts">
 import { createNamespace } from '@zi-shui/utils/create';
-import { useAttrs, useSlots, watch, ref, onMounted, nextTick, computed } from 'vue';
+import { useAttrs, useSlots, watch, ref, onMounted, nextTick, computed, inject } from 'vue';
+import { formItemContextKey, FormItemContext } from '../../form/src/form-item';
 import { inputProps, inputEmits } from './input';
+
+const formItemContext = inject(formItemContextKey, undefined)
+
 defineOptions({
   name: 'z-input',
   inheritAttrs: false,
@@ -47,16 +51,18 @@ const emit = defineEmits(inputEmits)
 
 const bem = createNamespace('input')
 
-
 const slots = useSlots();
 const attrs = useAttrs();
 
 // 监听 value 的变化
 watch(() =>
   props.modelValue, () => {//组件加载完毕后，设置输入框的值
+    console.log('输入了')
+    formItemContext?.validate('change', () => { })
     setNativeInputValue()
   }
 )
+
 const input = ref<HTMLInputElement | null>(null)
 const setNativeInputValue = () => {
   const inputEle = input.value
@@ -83,18 +89,19 @@ const showPwdVisible = computed(() => {
   )
 })
 
-
 const showClear = computed(() => {
   return (
     props.modelValue && props.clearable && !props.disabled && !props.readonly
   )
 })
+
 const clear = () => {
   emit('input', '');
   emit('update:modelValue', '');
   emit('clear');
   focus()
 }
+
 onMounted(() => {
   // 组件加载完毕后，设置输入框的值
   setNativeInputValue()
@@ -115,6 +122,7 @@ const handleFocus = (e: FocusEvent) => {
 }
 
 const handleBlur = (e: FocusEvent) => {
+  formItemContext?.validate('blur', () => { })
   emit('blur', e);
 }
 </script>

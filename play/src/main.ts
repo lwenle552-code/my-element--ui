@@ -4,7 +4,9 @@ import Icon from '@zi-shui/components/icon'
 import '@zi-shui/theme-chalk/src/index.scss'
 import Button from '@zi-shui/components/button'
 import Input from '@zi-shui/components/input'
-const plugins = [Icon, Button, Input]
+import FormItem from '@zi-shui/components/form'
+
+const plugins = [Icon, Button, Input, FormItem]
 
 const app = createApp(App)
 plugins.forEach(plugin => {

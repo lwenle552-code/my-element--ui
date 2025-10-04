@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue' // <-- 1. 引入 ref
+import { ref, reactive } from 'vue' // <-- 1. 引入 ref
 import { AddCircle } from '@vicons/ionicons5'
 
 // 2. 新增 loading 状态
@@ -25,6 +25,11 @@ const handleFocus = (e: FocusEvent) => {
 const handleBlur = (e: FocusEvent) => {
   console.log((e.target as HTMLInputElement).value, 'blur')
 }
+
+const state = reactive({
+  username: '',
+  password: '',
+})
 </script>
 
 <template>
@@ -60,6 +65,19 @@ const handleBlur = (e: FocusEvent) => {
     </template>
     <template #append>后端</template>
   </z-input>
+
+  <z-form :model="state" :rules="[
+    {
+      username: { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: ['blur', 'change'] }
+    }
+  ]">
+    <z-form-item prop="username" label="用户名" :rules="[{ required: true, message: '请输入用户名', trigger: 'blur' },
+
+    ]">
+      <z-input placeholder="请输入用户名" :clearable="true" v-model="state.username">
+      </z-input>
+    </z-form-item>
+  </z-form>
 </template>
 
 <style scoped></style>
