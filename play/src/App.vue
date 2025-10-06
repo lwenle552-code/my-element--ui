@@ -3,6 +3,7 @@ import { ref, reactive } from 'vue' // <-- 1. 引入 ref
 import { AddCircle } from '@vicons/ionicons5'
 
 import type { FormInstance } from '@zi-shui/components/form'
+import type { UploadRawFile } from '@zi-shui/components/upload'
 // 2. 新增 loading 状态
 const isLoading = ref(false)
 
@@ -37,6 +38,24 @@ const validateForm = () => {
   form?.validate((valid, errors) => {
     console.log(valid, errors)
   })
+}
+
+const handleBeforeUpload = (rawFile: UploadRawFile) => {
+  // 添加一些处理逻辑
+  console.log('准备上传文件:', rawFile)
+  return true // 返回 true 允许上传，返回 false 阻止上传
+}
+
+const handleUploadSuccess = (response: any, file: UploadRawFile) => {
+  console.log('上传成功:', response, file)
+}
+
+const handleUploadError = (error: any, file: UploadRawFile) => {
+  console.log('上传失败:', error, file)
+}
+
+const handleUploadProgress = (event: any, file: UploadRawFile) => {
+  console.log('上传进度:', event, file)
 }
 </script>
 
@@ -95,6 +114,12 @@ const validateForm = () => {
       提交
     </z-button>
   </z-form>
+
+  <!-- 使用本地服务器地址 -->
+  <z-upload action="http://localhost:3000/upload" :multiple="true" :before-upload="handleBeforeUpload"
+    :on-success="handleUploadSuccess" :on-error="handleUploadError" :on-progress="handleUploadProgress" drag>
+    <z-button>点我上传</z-button>
+  </z-upload>
 </template>
 
 <style scoped></style>

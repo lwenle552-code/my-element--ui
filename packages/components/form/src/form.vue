@@ -9,6 +9,7 @@ import { createNamespace } from '@zi-shui/utils/create';
 import { formProps, FormContextKey, FormContext } from './form';
 import { FormItemContext } from './form-item';
 import { provide, defineExpose } from 'vue';
+import type { Values } from 'async-validator';
 
 const bem = createNamespace('form')
 defineOptions({

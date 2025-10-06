@@ -5,9 +5,10 @@ import Icon from '@zi-shui/components/icon'
 import '@zi-shui/theme-chalk/src/index.scss'
 import Button from '@zi-shui/components/button'
 import Input from '@zi-shui/components/input'
+import Upload from '@zi-shui/components/upload'
 import { FormItem, Form } from '@zi-shui/components/Form'
 
-const plugins = [Icon, Button, Input, FormItem, Form]
+const plugins = [Icon, Button, Input, FormItem, Form, Upload]
 const app = createApp(App)
 plugins.forEach(plugin => app.use(plugin)) // 将组件注册成了全局组件
 
