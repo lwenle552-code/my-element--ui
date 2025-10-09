@@ -57,6 +57,8 @@ const handleUploadError = (error: any, file: UploadRawFile) => {
 const handleUploadProgress = (event: any, file: UploadRawFile) => {
   console.log('上传进度:', event, file)
 }
+
+const currentDate = ref(new Date())
 </script>
 
 <template>
@@ -120,6 +122,16 @@ const handleUploadProgress = (event: any, file: UploadRawFile) => {
     :on-success="handleUploadSuccess" :on-error="handleUploadError" :on-progress="handleUploadProgress" drag>
     <z-button>点我上传</z-button>
   </z-upload>
+
+  {{ currentDate }}
+  <z-calendar v-model="currentDate">
+    <template #date-cell="{ data }">
+      <p :class="data.isSelected ? 'is-selected' : ''">
+        {{ data.day.split('-').slice(1).join('-') }}
+        {{ data.isSelected ? '√' : '' }}
+      </p>
+    </template>
+  </z-calendar>
 </template>
 
 <style scoped></style>

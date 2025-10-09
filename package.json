@@ -23,6 +23,7 @@
     "@zi-shui/theme-chalk": "workspace:*",
     "@zi-shui/utils": "workspace:*",
     "async-validator": "^4.2.5",
+    "dayjs": "^1.11.18",
     "eslint": "^9.36.0",
     "eslint-plugin-vue": "^10.5.0"
   },
