@@ -28,7 +28,22 @@ module.exports = {
       '/component/': [
         {
           text: '基础组件',
-          items: [{ text: 'Icon', link: '/component/icon' }]
+          items: [
+            { text: 'Icon', link: '/component/icon' },
+            { text: 'Button', link: '/component/button' },
+            { text: 'Input', link: '/component/input' }
+          ]
+        },
+        {
+          text: '表单组件',
+          items: [
+            { text: 'Form', link: '/component/form' },
+            { text: 'Upload', link: '/component/upload' }
+          ]
+        },
+        {
+          text: '数据展示',
+          items: [{ text: 'Calendar', link: '/component/calendar' }]
         }
       ]
     }
